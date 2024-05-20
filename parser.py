@@ -26,7 +26,6 @@ PARAM_PATTERN = {
 
 
 def get_response(url: str):
-    """Вход в интернет"""
     response = requests.get(url, headers=HEADERS)
     return response
 

@@ -2,9 +2,12 @@ import sqlite3
 from pprint import pprint
 
 
+
+
 def get_conn():
     conn = sqlite3.connect('flat.db')
     return conn
+
 
 
 def create_table():
@@ -89,6 +92,8 @@ def get_data(query: str, params=None):
     conn.close()
     return res
 
-q = """SELECT * FROM flat"""
-flats = get_data(q)
-pprint(flats)
+
+if __name__ == '__main__':
+    q = """SELECT * FROM flat"""
+    flats = get_data(q)
+    pprint(flats)
