@@ -79,7 +79,6 @@ def get_flat_data(url: str) -> dict:
         "flat_id": url.split('/')[-2],
     }
 
-
     resp = get_response(url)
     if resp.ok:
         soup = BeautifulSoup(resp.text, 'lxml')
