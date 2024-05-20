@@ -57,12 +57,10 @@ def get_flats_links(last_page: int) -> list:
                 print(f'ERROR! {resp.url}')
                 continue
 
-            # print(price)
             price = price.replace(' р.', '').replace(' ', '')
             if price.isdigit():
                 link = card.find('a', href=True)['href']
                 links.append(f'https://realt.by{link}')
-    # pprint(links)
     return links
 
 
@@ -81,7 +79,6 @@ def get_flat_data(url: str) -> dict:
         "flat_id": url.split('/')[-2],
     }
 
-    # flat[] = url.split('/')[-2]
 
     resp = get_response(url)
     if resp.ok:
@@ -90,7 +87,6 @@ def get_flat_data(url: str) -> dict:
         try:
             title = soup.find('h1',
                               class_='order-1 mb-0.5 md:-order-2 md:mb-4 block w-full !inline-block lg:text-h1Lg text-h1 font-raleway font-bold flex items-center').text
-        # print(title)
         except Exception as e:
             title = ''
 
@@ -98,22 +94,18 @@ def get_flat_data(url: str) -> dict:
                           class_='!inline-block mr-1 lg:text-h2Lg text-h2 font-raleway font-bold flex items-center').text
         price = price.replace(' р.', '').replace(' ', '')
         price = int(price)
-        # print(price)
 
         try:
             image = soup.find('div', class_='swiper-wrapper').find_all('img')[1]['src']
-        # pprint(image)
         except Exception as e:
             image = ''
 
         try:
             discription = soup.find('div', class_=['description_wrapper__tlUQE']).text
-        # print(discription)
         except Exception as e:
             discription = ''
 
         params = soup.find_all('li', class_='relative py-1')
-        # pprint(params)
         for param in params:
             key = param.find('span', class_='text-basic sm:flex-shrink-0 mr-2').text
             value = param.find(['p', 'a']).text.replace(' м²', '').replace('\xa0', '')
@@ -125,7 +117,6 @@ def get_flat_data(url: str) -> dict:
         flat['price'] = price
         flat['image'] = image
         flat['discription'] = discription
-        # pprint(flat)
         return flat
 
     else:
@@ -134,7 +125,6 @@ def get_flat_data(url: str) -> dict:
 
 def run():
     create_table()
-    # last_page = get_last_page()
     links = get_flats_links(3)
     for link in tqdm(links, desc='FLAT DATA: '):
         data = get_flat_data(link)
