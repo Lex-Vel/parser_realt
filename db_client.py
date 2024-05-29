@@ -1,13 +1,9 @@
 import sqlite3
 from pprint import pprint
 
-
-
-
 def get_conn():
     conn = sqlite3.connect('flat.db')
     return conn
-
 
 
 def create_table():
