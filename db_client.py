@@ -1,6 +1,7 @@
 import sqlite3
 from pprint import pprint
 
+
 def get_conn():
     conn = sqlite3.connect('flat.db')
     return conn
@@ -31,6 +32,7 @@ def create_table():
     """)
 
     conn.close()
+
 
 def insert_flat(flat: dict) -> None:
     conn = get_conn()
