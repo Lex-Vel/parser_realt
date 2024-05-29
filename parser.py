@@ -131,5 +131,5 @@ def run():
             insert_flat(data)
 
 
-
-run()
+if __name__ == '__main__':
+    run()
